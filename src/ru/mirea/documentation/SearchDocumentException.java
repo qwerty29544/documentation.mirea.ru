@@ -1,7 +1,8 @@
 package ru.mirea.documentation;
 
 /*
-Обрабатывает ошибку поиска документа
+Method processes exceptions of:
+Document not found 404
  */
 public class SearchDocumentException extends Exception {
 }

@@ -12,7 +12,7 @@ public class Document {
     private Date DataCreation;//Дата создания документа
     private Date DataEdition;//Дата последнего изменения документа
     private String AuthorID;//Имя пользователя, создавшего или изменившего документ
-    private String Type;//Тип или расширение документа. Допускаются .pdf .doc .docx .txt
+    private DocumentType Type;//Тип или расширение документа. Допускаются .pdf .doc .docx .txt
     private int DocID;//Уникальный номер документа
 
     //Метод, возвращающий значение заголовка
@@ -36,19 +36,26 @@ public class Document {
         return this.AuthorID;
     }
     //Метод, возвращающий тип или расширение документа
-    public String getType(){
+   /*
+    public enum getType(){
+
         return this.Type;
     }
+    */
     //Метод, возвращающий уникальный номер документа
     public int getDocID(){
         return this.DocID;
     }
     //Метод, позволяющий изменить заголовок экземпляра документа
     public void setHeader(String Header){
+        if ( Header.length() > 200 ) throw new RunTimeException("Header is too long");
         this.Header = Header;
     }
+
+
     //Метод, позволяющий изменить тело экземпляра документа
     public void setBody(String Body){
+        if ( Body.length() > )
         this.Body = Body;
     }
     //Метод, позволяющий изменить дату создания экземпляра документа
@@ -64,9 +71,10 @@ public class Document {
         this.AuthorID = AuthorID;
     }
     //Метод, поозволяющий изменить тип или расширение экземпляра документа
-    public void setType(String Type){
+    /*public void setType(String Type){
         this.Type = Type;
     }
+    */
     //Метод, позволяющий изменить уникальный номер экземпляра документа
     public void setDocID(int DocID){
         this.DocID = DocID;
