@@ -55,7 +55,7 @@ public class Document {
 
     //Метод, позволяющий изменить тело экземпляра документа
     public void setBody(String Body){
-        if ( Body.length() > )
+        if ( Body.length() > 10000 )
         this.Body = Body;
     }
     //Метод, позволяющий изменить дату создания экземпляра документа
