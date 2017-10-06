@@ -7,13 +7,15 @@ package ru.mirea.documentation;
 Максимальный размер = 10 МB
  */
 public class Document {
-    private String Header;//Заголовок документа
-    private String Body;//Текст документа
-    private Date DataCreation;//Дата создания документа
-    private Date DataEdition;//Дата последнего изменения документа
-    private String AuthorID;//Имя пользователя, создавшего или изменившего документ
-    private DocumentType Type;//Тип или расширение документа. Допускаются .pdf .doc .docx .txt
-    private int DocID;//Уникальный номер документа
+    private String name;//Имя документа (От Димы)
+    private String Header;//Заголовок документа (От Димы)
+    private String Body;//Текст документа (От Димы)
+    private Date DataCreation;//Дата создания документа (Гуглить)
+    private Date DataEdition;//Дата последнего изменения документа (Гуглить)
+    private String AuthorID;//Имя пользователя, создавшего или изменившего документ (20 байт)
+    private DocumentType Type;//Тип или расширение документа. Допускаются .pdf .doc .docx .txt (10 байт)
+    private int DocID;//Уникальный номер документа (30 байт)
+    private byte[] content;//бинарное наполнение документа
 
     //Метод, возвращающий значение заголовка
     public String getHeader(){
