@@ -34,6 +34,29 @@ public class DocumentationImpl implements Documents {
         return docExample;// возврат экземпляра документа
 
     }
+
+    //Реализация создания документа, возвращаемый тип Документ, Создаём ДокID внутри классов, присваимаем экземплярам документов имя и userID
+    private Document CreateDOCXdocument(String name, int userID) {
+
+    }
+    //Реализация создания документа, возвращаемый тип Документ, Создаём ДокID внутри классов, присваимаем экземплярам документов имя и userID
+    private Document CreateTXTdocument(String name, int userID) {
+
+    }
+    //Реализация создания документа, возвращаемый тип Документ, Создаём ДокID внутри классов, присваимаем экземплярам документов имя и userID
+    private Document CreateRTFdocument(String name, int userID) {
+
+    }
+    //Реализация создания документа, возвращаемый тип Документ, Создаём ДокID внутри классов, присваимаем экземплярам документов имя и userID
+    private Document CreatePDFdocument(String name, int userID) {
+
+    }
+    //Реализация создания документа, возвращаемый тип Документ, Создаём ДокID внутри классов, присваимаем экземплярам документов имя и userID
+    private Document CreateDOCdocument(String name, int userID) {
+
+
+    }
+
     /**
      * Method realizes search of documents by name of it
      *
@@ -45,7 +68,11 @@ public class DocumentationImpl implements Documents {
     @Override
     public List<Document> searchByName(String name) throws SearchDocumentException {
         List<Document> listByNameExample;// создание экземпляра массива документов, выведенных по имени файла
-        listByNameExample = DummySearchByName(name);//ИЗ ИНТЕРФЕЙСА ХРАНИЛИЦА
+        try {
+            listByNameExample = DummySearchByName(name);//ИЗ ИНТЕРФЕЙСА ХРАНИЛИЦА
+        } catch(SearchDocumentException e) {
+            //описать ошибку
+        }
         return listByNameExample;//Возврат массива документов, выведенных оп имени файла
     }
 
@@ -60,7 +87,11 @@ public class DocumentationImpl implements Documents {
     @Override
     public List<Document> searchByType(DocumentType type) throws SearchDocumentException {
         List<Document> listByTypeExample;//создание экземпляра массива документов, выведенных по типу файла
-        listByTypeExample = DummySearchByType(DocumentType);//ИЗ ИНТЕРФЕЙСА ХРАНИЛИЦА
+        try {
+            listByTypeExample = DummySearchByType(DocumentType);//ИЗ ИНТЕРФЕЙСА ХРАНИЛИЦА
+        } catch (SearchDocumentException e) {
+            //описать ошибку
+        }
         return listByTypeExample;//Возврат экземпляра массива документов, выведенных по типу файла
     }
 
@@ -75,7 +106,11 @@ public class DocumentationImpl implements Documents {
     @Override
     public List<Document> searchByDataCreation(Date dataCreation) throws SearchDocumentException {
         List<Document> listByDataCreationExample;//создание экземпляра массива документа, выведенного по дате создания файла
-        listByDataCreationExample = DummySearchByDataCreation(dataCreation);//ИЗ ИНТЕРФЕЙСА ХРАНИЛИЦА
+        try {
+            listByDataCreationExample = DummySearchByDataCreation(dataCreation);//ИЗ ИНТЕРФЕЙСА ХРАНИЛИЦА
+        } catch (SearchDocumentException e) {
+            //описать ошибку
+        }
         return listByDataCreationExample;// возврат экземпляра массива документа, выведенного по дате создания файла
     }
 
@@ -90,7 +125,11 @@ public class DocumentationImpl implements Documents {
     @Override
     public List<Document> searchByDataEdition(Date dataEdition) throws SearchDocumentException {
         List<Document> listByDataEditionExample;//создание экземпляра массива документа, выведенного по дате последнего изменения файла
-        listByDataEditionExample = DummySearchByDataEdition(dataEdition);//ИЗ ИНТЕРФЕЙСА ХРАНИЛИЦА
+        try {
+            listByDataEditionExample = DummySearchByDataEdition(dataEdition);//ИЗ ИНТЕРФЕЙСА ХРАНИЛИЦА
+        } catch (SearchDocumentException e) {
+            //описать ошибку
+        }
         return listByDataEditionExample;//создание экземпляра массива документа, выведеннгго по дате последнего изменения файла
     }
 
@@ -105,7 +144,11 @@ public class DocumentationImpl implements Documents {
     @Override
     public List<Document> searchByAuthorID(int authorID) throws SearchDocumentException {
         List<Document> listByAuthorIDExample;//создание экземпляра массива документа, выведенного по уникальному номеру автора
-        listByAuthorIDExample = DummySearchByAuthorID(authorID);//ИЗ ИНТЕРФЕЙСА ХРАНИЛИЦА
+        try {
+            listByAuthorIDExample = DummySearchByAuthorID(authorID);//ИЗ ИНТЕРФЕЙСА ХРАНИЛИЦА
+        } catch (SearchDocumentException e) {
+            //описать ошибку
+        }
         return listByAuthorIDExample;//создание экземпляра массива документа, выведенного по уникальному номеру автора
     }
 
@@ -120,7 +163,11 @@ public class DocumentationImpl implements Documents {
     @Override
     public Document searchByDocID(int DocID) throws SearchDocumentException {
         Document listByDocIDExample;//создание экземпляра документа, выведенного по уникальному номеру документа
-        listByDocIDExample = DummySearchByDocID(DocID);//ИЗ ИНТЕРФЕЙСА ХРАНИЛИЦА
+        try {
+            listByDocIDExample = DummySearchByDocID(DocID);//ИЗ ИНТЕРФЕЙСА ХРАНИЛИЦА
+        } catch (SearchDocumentException e) {
+            //описать ошибку
+        }
         return listByDocIDExample;//создание экземпляра документа, выведенного по уникальному номеру документа
     }
 
@@ -139,6 +186,7 @@ public class DocumentationImpl implements Documents {
 
 
 
+        updateDocExample = null;//тут заменить и вернуть что-то
         return updateDocExample;//
 
     }
