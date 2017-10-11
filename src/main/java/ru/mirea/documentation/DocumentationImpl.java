@@ -2,6 +2,8 @@ package ru.mirea.documentation;
 
 import java.util.Date;
 import java.util.List;
+import com.itextpdf.text.Paragraph;
+
 
 public class DocumentationImpl implements Documents {
     /**
@@ -53,7 +55,6 @@ public class DocumentationImpl implements Documents {
     }
     //Реализация создания документа, возвращаемый тип Документ, Создаём ДокID внутри классов, присваимаем экземплярам документов имя и userID
     private Document CreateDOCdocument(String name, int userID) {
-
 
     }
 
@@ -180,7 +181,7 @@ public class DocumentationImpl implements Documents {
      * {@author Ivan Yurchenkov e-mail: <qwerty29544@gmail.com> https://vk.com/van3228}
      */
     @Override
-    public Document update(Document doc) throws DocumentSaveException {
+    public Document update(Document doc) throws DocumentSaveException {// 1. Изменение даты изменения, 2. Изменение Автора, 3. Тело(текст), 4. Заголовок, 5. Имя документа, 6. Тип документа - С чем работать
         Document updateDocExample;//создание экземпляра документа, в который будет передан файл на дальнейшее его изменеие
 
 

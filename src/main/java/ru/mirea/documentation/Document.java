@@ -63,16 +63,13 @@ public class Document {
         return this.Body;
     }
     //Метод, возвращающий читабельное имя автора
-
     public String getAuthorName(){
         return this.AuthorName;
     }
     //Метод, позволяющий получить заголовок документа
-
     public Map<String, String> getHeader() {
         return Header;
     }
-
     //Метод, позволяющий изменить тело экземпляра документа
     public void setBody(byte[] body){
         this.Body = body;
