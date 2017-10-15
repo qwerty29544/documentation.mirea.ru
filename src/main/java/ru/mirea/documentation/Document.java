@@ -1,8 +1,13 @@
 package ru.mirea.documentation;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.CharBuffer;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
+
 
 /*
 Класс экземпляра документа.
@@ -19,76 +24,93 @@ public class Document {
     private int DocID;//Уникальный номер документа (30 байт) (Неизменяемый)
     private Map<String,String> Header;// Заголовок документа. Реализован с помощью карты заголовков (Обязательно сеттер и геттер) (Изменяемый)
     private byte[] Body;//бинарное наполнение(Изменяемый)
-    private String AuthorName;//Читабельное имя автора(Изменяемый)
+
+    //метод прибавления единички к последнему числу в файле
+    public static int PlusOne(int number){
+        number=number+1;
+        return number;
+    }
+
+    //добавить метод для setHeader set
+
+    public Date getDataCreation(){
+        return this.DataCreation;
+    }//Метод, возвращающий значение даты создания документа
+
+    public Date getDataEdition(){return this.DataEdition; }//Метод, возвращающий значение даты последнего изменения документа
+
+    public int getAuthorID(){ return this.AuthorID;  }//Метод, возвращающий имя пользователя, создавшего или изменившего документ
+
+    public String getName(){
+        return this.Name;
+    }//Метод, реализующий получение имени документа
+
+    public int getDocID(){
+        return this.DocID;
+    }//Метод, возвращающий уникальный номер документа
+
+    public byte[] getBody(){
+        return this.Body;
+    }//Метод, возвращающий текст документа
+
+    public Map<String, String> getHeader() {
+        return this.Header;
+    } //Метод, позволяющий получить заголовок документа
+
+    public void setBody(byte[] body){ this.Body = body; }//Метод, позволяющий изменить тело экземпляра документа
+
+    public void setAuthorID(int userID){ this.AuthorID=userID; }//Метод, позволяющий изменить уникальный номер пользователя, последний раз изменившего или создавшего документ
+
+    public void setType(DocumentType type) { this.Type = type; }//Метод, поозволяющий изменить тип или расширение экземпляра документа
+
+    public void setName(String name){
+        this.Name = name;
+    }//Метод, позволяющий изменить имя документа
+
+    /**
+     * Из-за Кривого Архитектора, к сожалению, конструктор документа не умеет сразу запихивать внутрь текст и заголовок сразу
+     * Не знаю, хорошо ли это или нет
+     * Могу сказать точно одно: Это добавляет немного изворотливости, но при кодинге будет легко запутаться
+     * Написал сие Иван Юрченков це "Кривой Архитектор"
+     * Constructor of document that creates new fields: Type, AuthorID, Name, DataCreation, DataEdition, Body, Header, DocID.
+     * My apologize, but Header and Body after they are constructed are still empty
+     * You might use methods: setBody and setHeader for fill them;
+     * @param type - type of new document
+     * @param userID - unique number of user
+     * @param name - name of document
+     * @throws IOException
+     */
     //Конструктор документа. Генерирует DocID, Дату создания, Дату изменения. Получает на вход Тип документа, Код пользователя, Имя документа.
-    Document(DocumentType type, int userID, String name){
+    Document(DocumentType type, int userID, String name) throws IOException {
         this.Type = type;//задаём тип извне
         this.AuthorID = userID;//задаём уникальный номер автора извне
         this.Name = name;//задаём имя документа извне
         this.DataCreation = new Date();//реализация автоматического задания сегодняшней даты
         this.DataEdition = new Date();//реализация автоматического задания сегодняшней даты
-        this.Body = null;//нулевое тело, т.к. его заполнение должно производиться отдельно
-        /**
-         * Здесь нужно реализовать установку хэш-мапу заголовка кастомного розлива, либо интерфейс даст нам указание кастомных заголовков, либо каким-то образом дать им возможность установить эти заголовки самим
-         */
-        //this.Header = null;
-        /**
-         * Здесь хорошо бы создать текстовый документ, сохраняющий последнее сгенерированное число, считывать его каждый раз оттуда и прибавлять при присваивании 1
-         */
-        //this.DocID
-        this.AuthorName = getUserName(userID);//метод из классса пользователей, либо реализовать автозаполнение нулевым полем
-    }
-    //Метод, возвращающий значение даты создания документа
-    public Date getDataCreation(){
-        return this.DataCreation;
-    }
-    //Метод, возвращающий значение даты последнего изменения документа
-    public Date getDataEdition(){
-        return this.DataEdition;
-    }
-    //Метод, возвращающий имя пользователя, создавшего или изменившего документ
-    public int getAuthorID(){
-        return this.AuthorID;
-    }
-    //Метод, реализующий получение имени документа
-    public String getName(){
-        return this.Name;
-    }
-    //Метод, возвращающий уникальный номер документа
-    public int getDocID(){
-        return this.DocID;
-    }
-    //Метод, возвращающий текст документа
-    public byte[] getBody(){
-        return this.Body;
-    }
-    //Метод, возвращающий читабельное имя автора
-    public String getAuthorName(){
-        return this.AuthorName;
-    }
-    //Метод, позволяющий получить заголовок документа
-    public Map<String, String> getHeader() {
-        return Header;
-    }
-    //Метод, позволяющий изменить тело экземпляра документа
-    public void setBody(byte[] body){
-        this.Body = body;
-    }
-    //Метод, позволяющий изменить уникальный номер пользователя, последний раз изменившего или создавшего документ
-    public void setAuthorID(int userID){
-        this.AuthorID=userID;
-    }
-    //Метод, поозволяющий изменить тип или расширение экземпляра документа
-    public void setType(DocumentType type){
-        this.Type = type;
-    }
-    //Метод, позволяющий изменить читабельное имя автора документа
-    public void setAuthorName(String authorName){
-        this.AuthorName = authorName;
-    }
-    //Метод, позволяющий изменить имя документа
-    public void setName(String name){
-        this.Name = name;
+        this.Body = null; // создание пустого тела
+        this.Header = null; // создание пустого заголовка
+        int Number;
+        String File_Name = "DocID container.txt";
+        try {
+            if (!new File(File_Name).exists()) {
+                FileWriter FrContainer = new FileWriter(File_Name, true);
+                FrContainer.write("10000");
+                FrContainer.close();
+            }
+        } catch (IOException e) {
+        }
+        try {       //здесь присваиваем number последнее число
+            FileReader fr = new FileReader(File_Name);
+            String Snumber = null;
+            fr.read(CharBuffer.wrap(Snumber));
+            Number = Integer.parseInt(Snumber);
+            PlusOne(Number);    //метод, увеличивающий number на 1
+            fr.close();
+            FileWriter fw = new FileWriter(File_Name, true);
+            fw.write(Number + "\n");
+            fw.close();
+        } catch (IOException e) {
+        }
     }
 }
 
