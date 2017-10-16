@@ -6,5 +6,12 @@ Method processes exceptions:
 wraps exceptions from storage
  */
 
+import java.io.IOException;
+
 public class DocumentSaveException extends Exception {
+    IOException e;
+
+    public DocumentSaveException() {
+        e = new IOException();
+    }
 }

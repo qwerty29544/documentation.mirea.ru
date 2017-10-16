@@ -18,7 +18,7 @@ import java.util.Map;
 public class Document {
     private String Name;//Имя документа (Изменяемый)
     private Date DataCreation;//Дата создания документа (Неизменяемый, только в конструкторе)
-    private Date DataEdition;//Дата последнего изменения документа (Изменяемый, также задаётся в конструкторе)
+    private Date DataEdition;//Дата последнего изменения документа (Неизменяемый извне, задаётся в конструктореб меняется в update)
     private Integer AuthorID;//Код пользователя, создавшего или изменившего документ (Изменяемый)
     private DocumentType Type;//Тип или расширение документа. Допускаются .pdf .doc .docx .txt (10 байт) (Изменяемый)
     private int DocID;//Уникальный номер документа (30 байт) (Неизменяемый)
@@ -57,14 +57,24 @@ public class Document {
         return this.Header;
     } //Метод, позволяющий получить заголовок документа
 
-    public void setBody(byte[] body){ this.Body = body; }//Метод, позволяющий изменить тело экземпляра документа
+    public void setBody(byte[] body){
+        this.Body = body;
+        this.DataEdition = new Date();//поскольку сеттер, по-сути изменяет поле экземпляра документа, следовательно изменятся и сам документ
+    }//Метод, позволяющий изменить тело экземпляра документа
 
-    public void setAuthorID(int userID){ this.AuthorID=userID; }//Метод, позволяющий изменить уникальный номер пользователя, последний раз изменившего или создавшего документ
+    public void setAuthorID(int userID){
+        this.AuthorID=userID;
+        this.DataEdition=new Date();//поскольку сеттер, по-сути изменяет поле экземпляра документа, следовательно изменятся и сам документ
+    }//Метод, позволяющий изменить уникальный номер пользователя, последний раз изменившего или создавшего документ
 
-    public void setType(DocumentType type) { this.Type = type; }//Метод, поозволяющий изменить тип или расширение экземпляра документа
+    public void setType(DocumentType type) {
+        this.Type = type;
+        this.DataEdition=new Date();//поскольку сеттер, по-сути изменяет поле экземпляра документа, следовательно изменятся и сам документ
+    }//Метод, поозволяющий изменить тип или расширение экземпляра документа
 
     public void setName(String name){
         this.Name = name;
+        this.DataEdition=new Date();//поскольку сеттер, по-сути изменяет поле экземпляра документа, следовательно изменятся и сам документ
     }//Метод, позволяющий изменить имя документа
 
     /**
