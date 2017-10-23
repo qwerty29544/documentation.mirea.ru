@@ -1,8 +1,9 @@
 package ru.mirea.documentation;
-
+import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+//import com.itextpdf.text.Paragraph;
 
 
 public class DocumentationImpl implements Documents {
@@ -18,91 +19,36 @@ public class DocumentationImpl implements Documents {
      */
     @Override
     public Document create(String name, DocumentType type, int userID) throws DocumentSaveException {
-        Document docExample;//создание экземпляра документа
-        switch (type) {
-            case DOCX:
-                try {
-                    docExample = CreateDOCXdocument(name,userID);//метод создания DOCX документа (классы не описаны, классы не разработаны, классы protected)
-                }catch (IOException e) {}
-            case TXT:
-                try {
-                    docExample = CreateTXTdocument(name, userID);//метод создания TXT документа (классы не описаны, классы не разработаны, классы protected)
-                }catch (IOException e){}
-            case RTF:
-                try {
-                    docExample = CreateRTFdocument(name, userID);//метод создания RTF документа (классы не описаны, классы не разработаны, классы protected)
-                }catch (IOException r) {}
-            case PDF:
-                try {
-                    docExample = CreatePDFdocument(name, userID);//метод создания PDF документа (классы не описаны, классы не разработаны, классы protected)
-                }catch(IOException f){}
-            case DOC:
-                try {
-                    docExample = CreateDOCdocument(name,userID);//метод создания DOC документа (классы не описаны, классы не разработаны, классы protected)
-                }catch (IOException e){}
-            default:
-                docExample = null;//возврат пустого класса документа
+        try {
+            Document docExample = new Document(type, userID, name);//создание экземпл¤ра документа
+            return docExample;
+        }catch (IOException e){
+            Document docExample = null;
+            try {
+                docExample = new Document(null, 0, null);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            return docExample;
         }
-        return docExample;// возврат экземпляра документа
 
     }
 
-    //Реализация создания документа, возвращаемый тип Документ, Создаём ДокID внутри классов, присваимаем экземплярам документов имя и userID
-    private Document CreateDOCXdocument(String name, int userID) throws IOException {
-        try {
-            DocumentType Docx = DocumentType.DOCX;
-            Document DOCXdocumentExample = new Document(Docx, userID, name);//
-            return DOCXdocumentExample;
-        } catch (IOException e){
-            Document DOCXdocumentExample = new Document(null,0,null);
-            return DOCXdocumentExample;
-        }
-    }
-    //Реализация создания документа, возвращаемый тип Документ, Создаём ДокID внутри классов, присваимаем экземплярам документов имя и userID
-    private Document CreateTXTdocument(String name, int userID) throws IOException {
-        try {
-            DocumentType txt = DocumentType.TXT;
-            Document TXTdocumentExample = new Document(txt, userID, name);//
-            return TXTdocumentExample;
-        } catch (IOException e){
-            Document TXTdocumentExample = new Document(null,0,null);
-            return TXTdocumentExample;
-        }
+    //–еализаци¤ создани¤ документа, возвращаемый тип ƒокумент, —оздаЄм ƒокID внутри классов, присваимаем экземпл¤рам документов им¤ и userID
+    //private Document CreateDOCXdocument(String name, int userID)
 
-    }
-    //Реализация создания документа, возвращаемый тип Документ, Создаём ДокID внутри классов, присваимаем экземплярам документов имя и userID
-    private Document CreateRTFdocument(String name, int userID) throws IOException {
-        try {
-            DocumentType Rtf = DocumentType.RTF;
-            Document RTFdocumentExample = new Document(Rtf, userID, name);//
-            return RTFdocumentExample;
-        } catch (IOException e){
-            Document RTFdocumentExample = new Document(null,0,null);
-            return RTFdocumentExample;
-        }
-    }
-    //Реализация создания документа, возвращаемый тип Документ, Создаём ДокID внутри классов, присваимаем экземплярам документов имя и userID
-    private Document CreatePDFdocument(String name, int userID) throws IOException {
-        try {
-            DocumentType Pdf = DocumentType.PDF;
-            Document PDFdocumentExample = new Document(Pdf, userID, name);//
-            return PDFdocumentExample;
-        } catch (IOException e){
-            Document PDFdocumentExample = new Document(null,0,null);
-            return PDFdocumentExample;
-        }
-    }
-    //Реализация создания документа, возвращаемый тип Документ, Создаём ДокID внутри классов, присваимаем экземплярам документов имя и userID
-    private Document CreateDOCdocument(String name, int userID) throws IOException {
-        try {
-            DocumentType Doc = DocumentType.DOC;
-            Document DOCdocumentExample = new Document(Doc, userID, name);//
-            return DOCdocumentExample;
-        } catch (IOException e){
-            Document DOCdocumentExample = new Document(null,0,null);
-            return DOCdocumentExample;
-        }
-    }
+    //–еализаци¤ создани¤ документа, возвращаемый тип ƒокумент, —оздаЄм ƒокID внутри классов, присваимаем экземпл¤рам документов им¤ и userID
+    //private Document CreateRTFdocument(String name, int userID)
+
+    //–еализаци¤ создани¤ документа, возвращаемый тип ƒокумент, —оздаЄм ƒокID внутри классов, присваимаем экземпл¤рам документов им¤ и userID
+    //private Document CreatePDFdocument(String name, int userID)
+
+
+    //–еализаци¤ создани¤ документа, возвращаемый тип ƒокумент, —оздаЄм ƒокID внутри классов, присваимаем экземпл¤рам документов им¤ и userID
+    //private Document CreateDOCdocument(String name, int userID)
+
+    //–еализаци¤ создани¤ документа, возвращаемый тип ƒокумент, —оздаЄм ƒокID внутри классов, присваимаем экземпл¤рам документов им¤ и userID
+    //private Document CreateTXTdocument(String name, int userID)
 
     /**
      * Method realizes search of documents by name of it
@@ -114,13 +60,13 @@ public class DocumentationImpl implements Documents {
      */
     @Override
     public List<Document> searchByName(String name) throws SearchDocumentException {
-        List<Document> listByNameExample;// создание экземпляра массива документов, выведенных по имени файла
+        List<Document> listByNameExample;// создание экземпл¤ра массива документов, выведенных по имени файла
         try {
-            listByNameExample = DummySearchByName(name);//ИЗ ИНТЕРФЕЙСА ХРАНИЛИЦА
+            listByNameExample = DummySearchByName(name);//»« »Ќ“≈–‘≈…—ј ’–јЌ»Ћ»÷ј
         } catch(SearchDocumentException e) {
             //описать ошибку
         }
-        return listByNameExample;//Возврат массива документов, выведенных оп имени файла
+        return listByNameExample;//¬озврат массива документов, выведенных оп имени файла
     }
 
     /**
@@ -133,13 +79,13 @@ public class DocumentationImpl implements Documents {
      */
     @Override
     public List<Document> searchByType(DocumentType type) throws SearchDocumentException {
-        List<Document> listByTypeExample;//создание экземпляра массива документов, выведенных по типу файла
+        List<Document> listByTypeExample;//создание экземпл¤ра массива документов, выведенных по типу файла
         try {
-            listByTypeExample = DummySearchByType(DocumentType);//ИЗ ИНТЕРФЕЙСА ХРАНИЛИЦА
+            listByTypeExample = DummySearchByType(DocumentType);//»« »Ќ“≈–‘≈…—ј ’–јЌ»Ћ»÷ј
         } catch (SearchDocumentException e) {
             //описать ошибку
         }
-        return listByTypeExample;//Возврат экземпляра массива документов, выведенных по типу файла
+        return listByTypeExample;//¬озврат экземпл¤ра массива документов, выведенных по типу файла
     }
 
     /**
@@ -152,13 +98,13 @@ public class DocumentationImpl implements Documents {
      */
     @Override
     public List<Document> searchByDataCreation(Date dataCreation) throws SearchDocumentException {
-        List<Document> listByDataCreationExample;//создание экземпляра массива документа, выведенного по дате создания файла
+        List<Document> listByDataCreationExample;//создание экземпл¤ра массива документа, выведенного по дате создани¤ файла
         try {
-            listByDataCreationExample = DummySearchByDataCreation(dataCreation);//ИЗ ИНТЕРФЕЙСА ХРАНИЛИЦА
+            listByDataCreationExample = DummySearchByDataCreation(dataCreation);//»« »Ќ“≈–‘≈…—ј ’–јЌ»Ћ»÷ј
         } catch (SearchDocumentException e) {
             //описать ошибку
         }
-        return listByDataCreationExample;// возврат экземпляра массива документа, выведенного по дате создания файла
+        return listByDataCreationExample;// возврат экземпл¤ра массива документа, выведенного по дате создани¤ файла
     }
 
     /**
@@ -171,13 +117,13 @@ public class DocumentationImpl implements Documents {
      */
     @Override
     public List<Document> searchByDataEdition(Date dataEdition) throws SearchDocumentException {
-        List<Document> listByDataEditionExample;//создание экземпляра массива документа, выведенного по дате последнего изменения файла
+        List<Document> listByDataEditionExample;//создание экземпл¤ра массива документа, выведенного по дате последнего изменени¤ файла
         try {
-            listByDataEditionExample = DummySearchByDataEdition(dataEdition);//ИЗ ИНТЕРФЕЙСА ХРАНИЛИЦА
+            listByDataEditionExample = DummySearchByDataEdition(dataEdition);//»« »Ќ“≈–‘≈…—ј ’–јЌ»Ћ»÷ј
         } catch (SearchDocumentException e) {
             //описать ошибку
         }
-        return listByDataEditionExample;//создание экземпляра массива документа, выведеннгго по дате последнего изменения файла
+        return listByDataEditionExample;//создание экземпл¤ра массива документа, выведеннгго по дате последнего изменени¤ файла
     }
 
     /**
@@ -190,13 +136,13 @@ public class DocumentationImpl implements Documents {
      */
     @Override
     public List<Document> searchByAuthorID(int authorID) throws SearchDocumentException {
-        List<Document> listByAuthorIDExample;//создание экземпляра массива документа, выведенного по уникальному номеру автора
+        List<Document> listByAuthorIDExample;//создание экземпл¤ра массива документа, выведенного по уникальному номеру автора
         try {
-            listByAuthorIDExample = DummySearchByAuthorID(authorID);//ИЗ ИНТЕРФЕЙСА ХРАНИЛИЦА
+            listByAuthorIDExample = DummySearchByAuthorID(authorID);//»« »Ќ“≈–‘≈…—ј ’–јЌ»Ћ»÷ј
         } catch (SearchDocumentException e) {
             //описать ошибку
         }
-        return listByAuthorIDExample;//создание экземпляра массива документа, выведенного по уникальному номеру автора
+        return listByAuthorIDExample;//создание экземпл¤ра массива документа, выведенного по уникальному номеру автора
     }
 
     /**
@@ -209,13 +155,13 @@ public class DocumentationImpl implements Documents {
      */
     @Override
     public Document searchByDocID(int DocID) throws SearchDocumentException {
-        Document listByDocIDExample;//создание экземпляра документа, выведенного по уникальному номеру документа
+        Document listByDocIDExample;//создание экземпл¤ра документа, выведенного по уникальному номеру документа
         try {
-            listByDocIDExample = DummySearchByDocID(DocID);//ИЗ ИНТЕРФЕЙСА ХРАНИЛИЦА
+            listByDocIDExample = DummySearchByDocID(DocID);//»« »Ќ“≈–‘≈…—ј ’–јЌ»Ћ»÷ј
         } catch (SearchDocumentException e) {
             //описать ошибку
         }
-        return listByDocIDExample;//создание экземпляра документа, выведенного по уникальному номеру документа
+        return listByDocIDExample;//создание экземпл¤ра документа, выведенного по уникальному номеру документа
     }
 
     /**
@@ -227,14 +173,12 @@ public class DocumentationImpl implements Documents {
      * {@author Ivan Yurchenkov e-mail: <qwerty29544@gmail.com> https://vk.com/van3228}
      */
     @Override
-    public Document update(Document doc) throws DocumentSaveException {// 1. Изменение даты изменения, 2. Изменение Автора, 3. Тело(текст), 4. Заголовок, 5. Имя документа, 6. Тип документа - С чем работать
-        Document updateDocExample;//создание экземпляра документа, в который будет передан файл на дальнейшее его изменеие
+    public Document update(Document doc) throws DocumentSaveException {// 1. »зменение даты изменени¤, 2. »зменение јвтора, 3. “ело(текст), 4. «аголовок, 5. »м¤ документа, 6. “ип документа - — чем работать
+        Document updateDocExample;//создание экземпл¤ра документа, в который будет передан файл на дальнейшее его изменеие
 
-
-
-
-        updateDocExample = null;//тут заменить и вернуть что-то
-        return updateDocExample;//
+        updateDocExample = doc;
+        return updateDocExample;
 
     }
 }
+
