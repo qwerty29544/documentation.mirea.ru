@@ -1,6 +1,6 @@
 package ru.mirea.documentation;
 
-import java.util.Date;
+import java.util.*;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -78,7 +78,7 @@ public class DocumentsTest {
     }
 
     @org.junit.Test
-    public void TestCreateInfinityTXT() throws Exception {
+    public void TestCreateInfinityTXT() throws RuntimeException,Exception {
         //Unlimited creation TXT
         String a = "a";
         for (int i = 1; i < 30; i++) a += a;
@@ -232,7 +232,7 @@ public class DocumentsTest {
     public void TestSearchByAuthorIDIsExistsEveryTime() throws Exception {
         String a = "zzz";
         int id = 777;
-        List<Document> b;
+        List<Document> b = null;
         for (int i = 0; i < 9; i++) {
             b.add(i, Testeddoc.create(a, TXT, id));
         }
@@ -293,8 +293,9 @@ public class DocumentsTest {
 
     @org.junit.Test
     public void update() throws Exception {
-Document a=Testeddoc.create("XYZ",RTF,22213)
-Document b=Testeddoc.update(a);
+    Document a=Testeddoc.create("XYZ",RTF,22213);
+    Document b=Testeddoc.update(a);
     }
+
 
 }
